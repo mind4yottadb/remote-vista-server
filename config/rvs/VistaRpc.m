@@ -20,8 +20,6 @@ VistaRpc
  ;;	See the License for the specific language governing permissions and
  ;;	limitations under the License.
  ;;
- ;;  Modifications Copyright 2016 M/Gateway Developments Ltd
- ;;   Also Apache 2.0 Licensed
  ;;
  quit
  ;
