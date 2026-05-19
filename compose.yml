@@ -1,0 +1,33 @@
+#################################################################
+#                                                               #
+# Copyright (c) 2026 DnaSoft BV and/or its subsidiaries.        #
+# All rights reserved.                                          #
+#                                                               #
+#   This source code contains the intellectual property         #
+#   of its copyright holder(s), and is made available           #
+#   under a license.  If you do not know the terms of           #
+#   the license, please stop and do not read further.           #
+#                                                               #
+#################################################################
+name: 'remote-vista-server'
+
+services:
+  mind:
+    image: 'dnasoft/mind-rvs'
+    init: true
+    container_name: 'mind-rvs'
+    volumes:
+      - C:\Users\stefa\WebstormProjects\ehs/m:/home/vehu/lib/gtm/plugin/etc/mind/uApi
+    ports:
+      - "8089:8089"
+      - "8091:8091"
+      - "10000:10000"
+      - "2222:22"
+      - "8001:8001"
+      - "8080:8080"
+      - "9430:9430"
+      - "5001:5001"
+
+# docker compose up --detach
+# docker exec -it mind-rvs su - vehu -c 'yottadb -dir'
+# docker exec -it mind-rvs bash
