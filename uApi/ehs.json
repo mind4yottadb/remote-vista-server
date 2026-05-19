@@ -1,0 +1,17 @@
+{
+    "server": {
+        "vars": []
+    },
+    "client": [
+        {
+            "name": "EHS",
+            "methods": [
+                {
+                    "name": "login",
+                    "entryPoint": "login^mindEhs",
+                    "returns": "object"
+                }
+            ]
+        }
+    ]
+}
