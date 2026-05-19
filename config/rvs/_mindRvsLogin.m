@@ -20,30 +20,27 @@
 ; Returns:
 ; *glvn
 ;
-login(accessCode,verifyCode)
-    new buffer,res
+login(accessCode,verifyCode,context)
+    new buffer,res1,res2,res3
     ;
-    set *res=$$callRpc^%mindRvsVistaCaller("XUS SIGNON SETUP",.buffer)
-    zwr res
-
-
-    quit
+    set *res1=$$callRpc^%mindRvsVistaCaller("XUS SIGNON SETUP",.buffer)
     ;
+    set buffer("type")="LITERAL"
+    set buffer("value")=accessCode_":"_verifyCode
+    set *res2=$$callRpc^%mindRvsVistaCaller("XUS SIGNON SETUP",.buffer)
     ;
-; ************************************************************
-; loginWithContext(accessCode,verifyCode,context)
-; ************************************************************
-; parameters:
-; 1 name
-; 2 argsByRef
-;
-; Returns:
-; *glvn
-;
-loginWithContext(accessCode,verifyCode,context)
-
-
-
-    quit
+    kill buffer
+    set buffer("name")="XWB CREATE CONTEXT"
+    set buffer("type")="LITERAL"
+    set buffer("value")=context
+    set *res3=$$callRpc^%mindRvsVistaCaller("XWB CREATE CONTEXT",.buffer)
+    ;
+    do createEntry^%mindRvsContextManager("","")
+    ;
+    merge buffer(1)=res1
+    merge buffer(2)=res2
+    merge buffer(3)=res3
+    ;
+    quit *buffer
     ;
     ;

@@ -34,6 +34,10 @@ init
 ; Returns:
 ;
 createEntry(GUID,contextByRef)
+    set x="%"
+    for  set x=$order(@x) quit:x=""  do
+    .
+    . merge ^context(x)=@x
 
 
 
@@ -64,7 +68,7 @@ restoreEntry(GUID)
 ; Returns:
 ; status
 ;
-restoreEntry(GUID)
+removeEntry(GUID)
     new status
 
     quit status
