@@ -30,16 +30,6 @@ test()
  QUIT ok
  ;
 RPCEXECUTE(TMP,sessionId,sessionGlobal) ;
- ;n ix
- ;s ix=$increment(^rob)
- ;m ^rob(ix)=@TMP
- ;s ^robSession(ix,"id")=$g(sessionId)
- ;s ^robSession(ix,"global")=$g(sessionGlobal)
- ; TODO: Get rid of the notion of context. Check RPCs dynamically
- ; against all contexts that the user has.
- ;
- ; Execute an RPC based on paramaters provided in TMP reference global
- ;
  ; Input parameter
  ; ================
  ;
@@ -204,7 +194,7 @@ error(code,message) ;
 success(code,message) ;
  Q $$formatResult(1,$G(code)_" "_$G(message))
  ;
- ; Is RPC pertmited to run in a context?
+ ; Is RPC permitted to run in a context?
 CHKPRMIT(pRPCName,DUZ) ;checks to see if remote procedure is permited to run
  ;Input:  pRPCName - Remote procedure to check
  ;        DUZ    - User
