@@ -11,12 +11,64 @@
 ;#################################################################
 ;
 ; ************************************************************
-; callRpc
+; init
 ; ************************************************************
 ; parameters:
-; 1 glvn
 ;
 ; Returns:
-; <RESP3 BOOL>
 ;
-callRpc
+init
+
+
+
+    quit
+    ;
+    ;
+; ************************************************************
+; createEntry(GUID,contextByRef)
+; ************************************************************
+; parameters:
+; 1 GUID
+; 2 contextByRef
+;
+; Returns:
+;
+createEntry(GUID,contextByRef)
+
+
+
+    quit
+    ;
+    ;
+; ************************************************************
+; restoreEntry(GUID)
+; ************************************************************
+; parameters:
+; 1 GUID
+;
+; Returns:
+; contextByRef
+;
+restoreEntry(GUID)
+    new contextByRef
+
+    quit *contextByRef
+    ;
+    ;
+; ************************************************************
+; removeEntry(GUID)
+; ************************************************************
+; parameters:
+; 1 GUID
+;
+; Returns:
+; status
+;
+restoreEntry(GUID)
+    new status
+
+    quit status
+    ;
+    ;
+
+
