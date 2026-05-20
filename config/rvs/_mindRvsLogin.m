@@ -25,14 +25,14 @@ login(accessCode,verifyCode,context)
     ;
     set *res1=$$callRpc^%mindRvsVistaCaller("XUS SIGNON SETUP",.buffer)
     ;
-    set buffer("type",1)="LITERAL"
-    set buffer("value",1)=accessCode_":"_verifyCode
-    set *res2=$$callRpc^%mindRvsVistaCaller("XUS SIGNON SETUP",.buffer)
+    kill buffer
+    set buffer(1,"type")="LITERAL"
+    set buffer(1,"value")=accessCode_";"_verifyCode
+    set *res2=$$callRpc^%mindRvsVistaCaller("XUS AV CODE",.buffer)
     ;
     kill buffer
-    set buffer("name",1)="XWB CREATE CONTEXT"
-    set buffer("type",1)="LITERAL"
-    set buffer("value",1)=context
+    set buffer(1,"type")="LITERAL"
+    set buffer(1,"value")=context
     set *res3=$$callRpc^%mindRvsVistaCaller("XWB CREATE CONTEXT",.buffer)
     ;
     do createEntry^%mindRvsContextManager(%mindGUID)
