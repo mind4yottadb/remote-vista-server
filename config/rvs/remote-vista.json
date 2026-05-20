@@ -29,6 +29,16 @@
                         }
                     ],
                     "returns": "object"
+                },
+                {
+                    "name": "test",
+                    "entryPoint": "test^%mindRvsLogin",
+                    "parameters": [
+                        {
+                            "name": "guid",
+                            "datatype": "string"
+                        }
+                    ]
                 }
             ]
         }

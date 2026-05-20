@@ -13,7 +13,7 @@ name: 'remote-vista-server'
 
 services:
   mind:
-    image: 'dnasoft/mind-rvs'
+    image: 'mind-rvs'
     init: true
     container_name: 'mind-rvs'
     volumes:

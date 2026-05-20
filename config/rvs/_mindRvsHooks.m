@@ -18,9 +18,8 @@
 ; Returns:
 ;
 onInit
-
-
-
+    do init^%mindRvsContextManager
+    ;
     quit
     ;
     ;

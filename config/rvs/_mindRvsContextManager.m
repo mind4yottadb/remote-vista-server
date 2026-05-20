@@ -18,49 +18,51 @@
 ; Returns:
 ;
 init
-
-
-
+    kill ^%mindRvs
+    ;
     quit
     ;
     ;
 ; ************************************************************
-; createEntry(GUID,contextByRef)
+; createEntry(guid,contextByRef)
 ; ************************************************************
 ; parameters:
-; 1 GUID
+; 1 guid
 ; 2 contextByRef
 ;
 ; Returns:
 ;
-createEntry(GUID,contextByRef)
+createEntry(guid)
     set x="%"
     for  set x=$order(@x) quit:x=""  do
-    .
-    . merge ^context(x)=@x
-
-
-
+    . quit:$find(x,"%mind")
+    . quit:$zextract(x,1,1)="%"
+    . quit:$ascii($zextract(x,1,1))>96
+    . merge ^%mindRvs("sessions",guid,"vars",x)=@x
+    ;
+    set ^%mindRvs("sessions",guid,"timestamp")=$zut
+    ;
     quit
     ;
     ;
 ; ************************************************************
-; restoreEntry(GUID)
+; restoreEntry(guid)
 ; ************************************************************
 ; parameters:
-; 1 GUID
+; 1 guid
 ;
 ; Returns:
 ; contextByRef
 ;
-restoreEntry(GUID)
-    new contextByRef
+restoreEntry(guid)
+    new %mindRvsCnt
+    ;
 
-    quit *contextByRef
+    set %mindRvsCnt="" for  set %mindRvsCnt=$order(^%mindRvs("sessions",guid,"vars",%mindRvsCnt)) quit:%mindRvsCnt=""  merge %mindRvsCnt=@^%mindRvs("sessions",guid,"vars"@(%mindRvsCnt)
     ;
     ;
 ; ************************************************************
-; removeEntry(GUID)
+; removeEntry(guid)
 ; ************************************************************
 ; parameters:
 ; 1 GUID
@@ -68,7 +70,7 @@ restoreEntry(GUID)
 ; Returns:
 ; status
 ;
-removeEntry(GUID)
+removeEntry(guid)
     new status
 
     quit status

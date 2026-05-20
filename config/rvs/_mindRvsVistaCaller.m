@@ -24,7 +24,7 @@ callRpc(name,argsByRef)
     new rpcBuffer,ret
     ;
     set rpcBuffer("name")=name
-    merge rpcBuffer("input",1)=argsByRef
+    merge rpcBuffer("input")=argsByRef
     ;
     set rpcBuffer("ret")=$$RPCEXECUTE^VistaRpc("rpcBuffer")
     ;

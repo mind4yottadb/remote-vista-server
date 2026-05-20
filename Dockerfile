@@ -10,7 +10,6 @@
 #                                                               #
 #################################################################
 
-#FROM yottadb/yottadb:r2.02
 FROM worldvista/vehu
 
 # Extra's to run non-interactive Chrome
@@ -19,7 +18,7 @@ FROM worldvista/vehu
 			#libicu-dev libsodium-dev curl libcurl4-openssl-dev libnss3-tools libicu74
 
 # install latest version of MIND server
-RUN cd /tmp && git clone -b main --single-branch https://github.com/mind4yottadb/mind-server.git && cd mind-server && mkdir build && cd build && cmake .. && make && make install
+RUN cd /tmp && rm -rf mind-server && git clone -b main --single-branch https://github.com/mind4yottadb/mind-server.git && cd mind-server && mkdir build && cd build && cmake .. && make && make install
 
 # change default dir
 WORKDIR /opt/yottadb/r2.02_x86_64/plugin/etc/mind
