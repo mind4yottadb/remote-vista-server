@@ -11,11 +11,12 @@
 ;#################################################################
 ;
 ; ************************************************************
-; login(accessCode,verifyCode)
+; login(accessCode,verifyCode,context)
 ; ************************************************************
 ; parameters:
-; 1 name
-; 2 argsByRef
+; 1 accessCode      <string>
+; 2 verifyCode      <string>
+; 3 context         <string>
 ;
 ; Returns:
 ; *glvn
@@ -48,13 +49,24 @@ login(accessCode,verifyCode,context)
 test(guid)
     new $etrap
     set $etrap="do log^%mindLogger($zstatus)"
+    set %s=$zut
     new %mindRvsName set %mindRvsName="^%mindRvs(""sessions"",guid,""vars"")",%mindRvsCnt="" for  set %mindRvsCnt=$order(^%mindRvs("sessions",guid,"vars",%mindRvsCnt)) quit:%mindRvsCnt=""  merge @%mindRvsCnt=@%mindRvsName@(%mindRvsCnt)
-    ;
-    new io
-    set io=$zio
-    use %mindParams("logDevice")
-    zwr
-    use io
+    do log^%mindLogger($zut-%s)
     ;
     quit
+    ;
+    ;
+executeRpc(guid,name,args)
+    new buffer
+    new $etrap
+    set $etrap="do log^%mindLogger($zstatus) goto executeRpcQuit^%mindRvsLogin"
+    new %mindRvsName set %mindRvsName="^%mindRvs(""sessions"",guid,""vars"")",%mindRvsCnt="" for  set %mindRvsCnt=$order(^%mindRvs("sessions",guid,"vars",%mindRvsCnt)) quit:%mindRvsCnt=""  merge @%mindRvsCnt=@%mindRvsName@(%mindRvsCnt)
+    ;
+    merge a=@args
+    set *buffer=$$callRpc^%mindRvsVistaCaller(name,.a)
+    ;
+executeRpcQuit
+    quit *buffer
+    ;
+    ;
 

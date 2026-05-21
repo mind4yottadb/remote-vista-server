@@ -39,6 +39,25 @@
                             "datatype": "string"
                         }
                     ]
+                },
+                {
+                    "name": "executeRpc",
+                    "entryPoint": "executeRpc^%mindRvsLogin",
+                    "parameters": [
+                        {
+                            "name": "guid",
+                            "datatype": "string"
+                        },
+                        {
+                            "name": "name",
+                            "datatype": "string"
+                        },
+                        {
+                            "name": "args",
+                            "datatype": "object"
+                        }
+                    ],
+                    "returns": "object"
                 }
             ]
         }
