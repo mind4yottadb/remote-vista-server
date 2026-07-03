@@ -3,6 +3,7 @@
         "vars": [
             "%mindRvsSettings"
         ],
+        "code": "$ydb_dist/plugin/o/remote-vista-server.so",
         "hooks": {
             "onInit": "onInit^%mindRvsHooks",
             "onTerminate": "onTerminate^%mindRvsHooks",
