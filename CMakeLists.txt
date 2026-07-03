@@ -65,7 +65,7 @@ install(FILES config/users.json DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind)
 
 install(FILES config/mind-vista DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind PERMISSIONS OWNER_EXECUTE)
 #install(FILES commands/mind-vehu-vista DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind PERMISSIONS OWNER_EXECUTE)
-install(FILES config/rvs/remote-vista.json DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind/uApi)
+install(FILES config/rvs/remote-vista.json DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind/rvs)
 
 # copy the manifest file to the plugin dir
 #install(FILES ${CMAKE_CURRENT_BINARY_DIR}/_mind.manifest.json DESTINATION ${YOTTADB_M_PLUGIN_DIR})
