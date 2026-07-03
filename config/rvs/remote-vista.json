@@ -1,6 +1,8 @@
 {
     "server": {
-        "vars": [],
+        "vars": [
+            "%mindRvsSettings"
+        ],
         "hooks": {
             "onInit": "onInit^%mindRvsHooks",
             "onTerminate": "onTerminate^%mindRvsHooks",
