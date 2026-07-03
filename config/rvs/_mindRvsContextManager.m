@@ -58,7 +58,7 @@ restoreEntry(guid)
     new %mindRvsCnt
     ;
 
-    set %mindRvsCnt="" for  set %mindRvsCnt=$order(^%mindRvs("sessions",guid,"vars",%mindRvsCnt)) quit:%mindRvsCnt=""  merge %mindRvsCnt=@^%mindRvs("sessions",guid,"vars"@(%mindRvsCnt)
+    set %mindRvsCnt="" for  set %mindRvsCnt=$order(^%mindRvs("sessions",guid,"vars",%mindRvsCnt)) quit:%mindRvsCnt=""  merge %mindRvsCnt=@^%mindRvs("sessions",guid,"vars",%mindRvsCnt)
     ;
     ;
 ; ************************************************************
