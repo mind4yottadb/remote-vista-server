@@ -60,24 +60,15 @@ add_ydb_library(remote-vista-server SOURCES ${source_files})
 # Install shared library
 install_ydb_library(remote-vista-server)
 
-if(NOT so_only)
-    install(FILES config/mind.conf DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind)
-    install(FILES config/users.json DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind)
-    if(tls)
-        install(FILES config/mind.ydbcrypt DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind)
-    endif()
+install(FILES config/mind.conf DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind)
+install(FILES config/users.json DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind)
 
-    install(FILES commands/mind DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind PERMISSIONS OWNER_EXECUTE)
-    install(FILES commands/mind-vehu-vista DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind PERMISSIONS OWNER_EXECUTE)
-    install(DIRECTORY DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind/uApi)
-
-    if(test_mode)
-        install(DIRECTORY test DESTINATION /opt/mind)
-    endif()
-endif()
+install(FILES commands/mind-vista DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind PERMISSIONS OWNER_EXECUTE)
+install(FILES commands/mind-vehu-vista DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind PERMISSIONS OWNER_EXECUTE)
+install(FILES config/rvs/remote-vista.json DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind/uApi)
 
 # copy the manifest file to the plugin dir
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/_mind.manifest.json DESTINATION ${YOTTADB_M_PLUGIN_DIR})
-if(ydb_icu_version)
-	install(FILES ${CMAKE_CURRENT_BINARY_DIR}/_mind.manifest.json DESTINATION ${YOTTADB_M_PLUGIN_DIR}/utf8)
-endif()
+#install(FILES ${CMAKE_CURRENT_BINARY_DIR}/_mind.manifest.json DESTINATION ${YOTTADB_M_PLUGIN_DIR})
+#if(ydb_icu_version)
+#	install(FILES ${CMAKE_CURRENT_BINARY_DIR}/_mind.manifest.json DESTINATION ${YOTTADB_M_PLUGIN_DIR}/utf8)
+#endif()
