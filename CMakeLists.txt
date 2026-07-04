@@ -62,7 +62,7 @@ add_ydb_library(remote-vista-server SOURCES ${source_files})
 # Install shared library
 install_ydb_library(remote-vista-server)
 
-if(build_dev)
+if(NOT build_dev)
     install(FILES config/remote-vista.json.prod DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind/rvs/remote-vista.json)
     install(FILES config/mind.conf DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind)
     install(FILES config/users.json DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind)
