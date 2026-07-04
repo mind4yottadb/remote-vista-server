@@ -30,16 +30,14 @@ project(remote-vista-server
 	VERSION 0.0.1)
 find_package(YOTTADB REQUIRED)
 
-if(build_dev)
-    if(EXISTS "${YOTTADB_M_PLUGIN_DIR}/_mind.so")
-        message(STATUS "Found MIND server: ${YOTTADB_M_PLUGIN_DIR}/_mind.so")
-    else()
-        FetchContent_Declare(mind-server
-            GIT_REPOSITORY https://github.com/mind4yottadb/mind-server.git
-            GIT_TAG        main
-        )
-        FetchContent_MakeAvailable(mind-server)
-    endif()
+if(EXISTS "${YOTTADB_M_PLUGIN_DIR}/_mind.so")
+    message(STATUS "Found MIND server: ${YOTTADB_M_PLUGIN_DIR}/_mind.so")
+else()
+    FetchContent_Declare(mind-server
+        GIT_REPOSITORY https://github.com/mind4yottadb/mind-server.git
+        GIT_TAG        main
+    )
+    FetchContent_MakeAvailable(mind-server)
 endif()
 
 message(STATUS "Install Location: ${YOTTADB_M_PLUGIN_DIR}")
@@ -47,14 +45,16 @@ message(STATUS "Install Location: ${YOTTADB_M_PLUGIN_DIR}")
 #configure_file(src/server/m/_mindVersion.m src/server/m/init/_mindVersion.m @ONLY)
 #configure_file(_mind.manifest.json ${CMAKE_CURRENT_BINARY_DIR}/_mind.manifest.json @ONLY)
 
-set(source_files
-	config/rvs/_mindRvsContextManager.m
-	config/rvs/_mindRvsEntryPoints.m
-	config/rvs/_mindRvsHooks.m
-	config/rvs/_mindRvsLogin.m
-	config/rvs/_mindRvsVistaCaller.m
-	config/rvs/VistaRpc.m
-)
+if(NOT build_dev)
+    set(source_files
+        config/rvs/_mindRvsContextManager.m
+        config/rvs/_mindRvsEntryPoints.m
+        config/rvs/_mindRvsHooks.m
+        config/rvs/_mindRvsLogin.m
+        config/rvs/_mindRvsVistaCaller.m
+        config/rvs/VistaRpc.m
+    )
+endif()
 
 # .so file for plugin
 add_ydb_library(remote-vista-server SOURCES ${source_files})
