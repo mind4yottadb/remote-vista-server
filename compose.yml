@@ -16,8 +16,10 @@ services:
     image: 'mind-rvs'
     init: true
     container_name: 'mind-rvs'
-    #volumes:
-    #  - C:\Users\stefa\WebstormProjects\remote-vista-server/config:/home/vehu/lib/gtm/plugin/etc/mind
+    environment:
+      - dev_mode=1
+    volumes:
+      - C:\Users\stefa\WebstormProjects\remote-vista-server/config:/home/vehu/lib/gtm/plugin/etc/mind
     ports:
       - "8089:8089"
       - "10001:10001"

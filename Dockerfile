@@ -18,8 +18,12 @@ FROM worldvista/vehu
 			#libicu-dev libsodium-dev curl libcurl4-openssl-dev libnss3-tools libicu74
 
 # install latest version of MIND server
-ENV xxx=131
-RUN cd /tmp && rm -rf remote-vista-server && git clone -b v0.0.1 --single-branch https://github.com/mind4yottadb/remote-vista-server.git && cd remote-vista-server && mkdir build && cd build && cmake .. && make && make install
+ENV xxx=133
+RUN if [ "$dev_mode" = 1 ]; then \
+      cd /tmp && rm -rf remote-vista-server && git clone -b v0.0.1 --single-branch https://github.com/mind4yottadb/remote-vista-server.git && cd remote-vista-server && mkdir build && cd build && cmake .. -Dbuild_dev=1 && make && make install; \
+    else \
+      cd /tmp && rm -rf remote-vista-server && git clone -b v0.0.1 --single-branch https://github.com/mind4yottadb/remote-vista-server.git && cd remote-vista-server && mkdir build && cd build && cmake .. && make && make install; \
+    fi
 
 # change default dir
 WORKDIR /opt/yottadb/r2.02_x86_64/plugin/etc/mind
