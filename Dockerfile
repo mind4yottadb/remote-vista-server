@@ -18,7 +18,7 @@ FROM worldvista/vehu
 			#libicu-dev libsodium-dev curl libcurl4-openssl-dev libnss3-tools libicu74
 
 # install latest version of MIND server
-ENV xxx=129
+ENV xxx=130
 RUN cd /tmp && rm -rf remote-vista-server && git clone -b v0.0.1 --single-branch https://github.com/mind4yottadb/remote-vista-server.git && cd remote-vista-server && mkdir build && cd build && cmake .. && make && make install
 
 # change default dir
