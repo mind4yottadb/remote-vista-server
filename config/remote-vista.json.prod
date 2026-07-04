@@ -1,0 +1,68 @@
+{
+    "server": {
+        "vars": [
+            "%mindRvsSettings"
+        ],
+        "code": "$ydb_dist/plugin/o/remote-vista-server.so",
+        "hooks": {
+            "onInit": "onInit^%mindRvsHooks",
+            "onTerminate": "onTerminate^%mindRvsHooks",
+            "onError": "onError^%mindRvsHooks"
+        }
+    },
+    "client": [
+        {
+            "name": "EHS",
+            "methods": [
+                {
+                    "name": "login",
+                    "entryPoint": "login^%mindRvsLogin",
+                    "parameters": [
+                        {
+                            "name": "accessCode",
+                            "datatype": "string"
+                        },
+                        {
+                            "name": "verifyCode",
+                            "datatype": "string"
+                        },
+                        {
+                            "name": "context",
+                            "datatype": "string"
+                        }
+                    ],
+                    "returns": "object"
+                },
+                {
+                    "name": "test",
+                    "entryPoint": "test^%mindRvsLogin",
+                    "parameters": [
+                        {
+                            "name": "guid",
+                            "datatype": "string"
+                        }
+                    ]
+                },
+                {
+                    "name": "executeRpc",
+                    "entryPoint": "executeRpc^%mindRvsLogin",
+                    "parameters": [
+                        {
+                            "name": "guid",
+                            "datatype": "string"
+                        },
+                        {
+                            "name": "name",
+                            "datatype": "string"
+                        },
+                        {
+                            "name": "args",
+                            "datatype": "object"
+                        }
+                    ],
+                    "returns": "object"
+                }
+            ]
+        }
+    ]
+}

@@ -30,14 +30,16 @@ project(remote-vista-server
 	VERSION 0.0.1)
 find_package(YOTTADB REQUIRED)
 
-if(EXISTS "${YOTTADB_M_PLUGIN_DIR}/_mind.so")
-	message(STATUS "Found MIND server: ${YOTTADB_M_PLUGIN_DIR}/_mind.so")
-else()
-	FetchContent_Declare(mind-server
-		GIT_REPOSITORY https://github.com/mind4yottadb/mind-server.git
-		GIT_TAG        main
-	)
-	FetchContent_MakeAvailable(mind-server)
+if(build_dev)
+    if(EXISTS "${YOTTADB_M_PLUGIN_DIR}/_mind.so")
+        message(STATUS "Found MIND server: ${YOTTADB_M_PLUGIN_DIR}/_mind.so")
+    else()
+        FetchContent_Declare(mind-server
+            GIT_REPOSITORY https://github.com/mind4yottadb/mind-server.git
+            GIT_TAG        main
+        )
+        FetchContent_MakeAvailable(mind-server)
+    endif()
 endif()
 
 message(STATUS "Install Location: ${YOTTADB_M_PLUGIN_DIR}")
@@ -60,12 +62,14 @@ add_ydb_library(remote-vista-server SOURCES ${source_files})
 # Install shared library
 install_ydb_library(remote-vista-server)
 
-install(FILES config/mind.conf DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind)
-install(FILES config/users.json DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind)
+if(build_dev)
+    install(FILES config/remote-vista.json.prod DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind/rvs/remote-vista.json)
+    install(FILES config/mind.conf DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind)
+    install(FILES config/users.json DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind)
+endif()
 
 install(FILES config/mind-vista DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind PERMISSIONS OWNER_EXECUTE)
 #install(FILES commands/mind-vehu-vista DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind PERMISSIONS OWNER_EXECUTE)
-install(FILES config/rvs/remote-vista.json DESTINATION ${YOTTADB_PLUGIN_PREFIX}/etc/mind/rvs)
 
 # copy the manifest file to the plugin dir
 #install(FILES ${CMAKE_CURRENT_BINARY_DIR}/_mind.manifest.json DESTINATION ${YOTTADB_M_PLUGIN_DIR})
