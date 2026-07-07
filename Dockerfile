@@ -29,5 +29,9 @@ RUN if [ "$dev_mode" = 1 ]; then \
 WORKDIR /opt/yottadb/r2.02_x86_64/plugin/etc/mind
 
 
-# to build the image
+# to build the prod image
+# docker image build --progress=plain -t mind-rvs .
+
+# to build the dev image
+# export dev_mode=1
 # docker image build --progress=plain -t mind-rvs .
